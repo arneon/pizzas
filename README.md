@@ -28,9 +28,9 @@ Ejecutar los siguientes comandos desde la consola:
 4.- sail up  
 5.- sail artisan key:generate  
 6.- sail artisan migrate 
-7.- sail artisan db:seed --class="Arneon\LaravelPizzas\Infrastructure\Database\Seeders\IngredientSeeder"   
-8.- sail artisan db:seed --class="Arneon\LaravelUsers\Infrastructure\Database\Seeders\UserSeeder"
-9.- sail artisan vendor:publish --tag=tests --force
+7.- sail artisan db:seed --class="Arneon\LaravelPizzas\Infrastructure\Database\Seeders\IngredientSeeder"     
+8.- sail artisan db:seed --class="Arneon\LaravelUsers\Infrastructure\Database\Seeders\UserSeeder"  
+9.- sail artisan vendor:publish --tag=tests --force  
 
 Desde un navegador, abrir el siguiente enlace:  
 http://localhost (Colocar email => test@casfid.com y password => 12345678)  
