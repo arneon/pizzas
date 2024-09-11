@@ -3,10 +3,11 @@ Se administra la creación de un catálogo de Pizzas e Ingredientes donde el cá
 
 
 ## Project description:
-Desarrollo de proyecto con 2 paquetes laravel aplicando arquitectura hexagonal y DDD
+Se usan 3 contenedores docker: Apache2, Mysql y Redis   
+Se desarrollaron  2 paquetes laravel aplicando arquitectura hexagonal y DDD
 Se usa REDIS para que el listado de pizzas sea presentado mas rápidamente
 Se aplicaron los tests automáticos respectivos en cada paquete
-Se usó Bootstrap y Jquery en el frontend
+Se usó Bootstrap y Jquery en el frontend, atendiendo el requisito de una página responsive
 Se efectuan las validaciones respectivas en cada formulario para no tener redundancia de datos
 
 
@@ -27,13 +28,12 @@ Ejecutar los siguientes comandos desde la consola:
 4.- sail up  
 5.- sail artisan key:generate  
 6.- sail artisan migrate 
-7.- sail artisan db:seed --class="Arneon\LaravelPizzas\Infrastructure\Database\Seeders\IngredientSeeder" 
-8.- sail artisan db:seed --class="Arneon\LaravelUsers\Infrastructure\Database\Seeders\UserSeeder" 
-
-Ejecutar los siguientes endpoints desde el archivo postman:  
-1.-   user-register (Puede cambiar los valores de los campos)  
+7.- sail artisan db:seed --class="Arneon\LaravelPizzas\Infrastructure\Database\Seeders\IngredientSeeder"   
+8.- sail artisan db:seed --class="Arneon\LaravelUsers\Infrastructure\Database\Seeders\UserSeeder"
+9.- sail artisan vendor:publish --tag=tests --force
 
 Desde un navegador, abrir el siguiente enlace:  
 http://localhost (Colocar email => test@casfid.com y password => 12345678)  
 
-En la carpeta /tests/Feature está la colección postman para ejecutar los scripts
+Tests automáticos: Los tests automáticos se ejecutan en una base de datos SQLITE y en REDIS.  
+sail artisan test   
