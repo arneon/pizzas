@@ -24,7 +24,7 @@ INCREMENT_PERCENT=50
 Ejecutar los siguientes comandos desde la consola:  
 1.- composer install  
 2.- cp .env.example .env  
-3.- php artisan sail:install (Seleccionar MYSQL Y REDIS) 
+3.- php artisan sail:install (Seleccionar MYSQL Y REDIS)   
 4.- sail up  
 5.- sail artisan key:generate  
 6.- sail artisan migrate 
