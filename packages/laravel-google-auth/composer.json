@@ -1,0 +1,23 @@
+{
+    "name": "arneon/laravel-google-auth",
+    "description": "Google Auth Login",
+    "minimum-stability": "stable",
+    "version": "1.0.0",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arnaldo Orozco Nuñez",
+            "email": "arneon@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "*",
+        "laravel/socialite": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arneon\\LaravelGoogleAuth\\": "src/"
+        }
+    }
+}
