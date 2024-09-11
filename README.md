@@ -27,7 +27,7 @@ Ejecutar los siguientes comandos desde la consola:
 3.- php artisan sail:install (Seleccionar MYSQL Y REDIS)   
 4.- sail up  
 5.- sail artisan key:generate  
-6.- sail artisan migrate 
+6.- sail artisan migrate   
 7.- sail artisan db:seed --class="Arneon\LaravelPizzas\Infrastructure\Database\Seeders\IngredientSeeder"     
 8.- sail artisan db:seed --class="Arneon\LaravelUsers\Infrastructure\Database\Seeders\UserSeeder"  
 9.- sail artisan vendor:publish --tag=tests --force  
