@@ -37,8 +37,8 @@ http://localhost (Colocar email => test@casfid.com y password => 12345678)
 
 ## Colección Postman:  
 En la carpeta tests está una colección postman para registrar usuarios y acceder al enpoint que lista las pizzas. Para usarlo debe ejecutarlos en este orden:  
-1.- Endpoint user-register: Crea un nuevo usuario y copia el token en una variable de la colección
-2.- Endpoint PizzaList: Lista las pizzas y sus respectivos ingredientes  
+1.- Endpoint user-register: Crea un nuevo usuario y copia el token en una variable de la colección.  
+2.- Endpoint PizzaList: Lista las pizzas y sus respectivos ingredientes.    
 
 ## Tests automáticos:   
 Los tests automáticos se ejecutan en una base de datos SQLITE y en REDIS.  
