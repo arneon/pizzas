@@ -35,5 +35,8 @@ class PackageServiceProvider extends ServiceProvider
             __DIR__ . '/../Views' => resource_path('views/vendor/arneon/laravel-pizzas'),
         ], 'views');
 
+        $locale = config('app.locale');
+        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'laravel-pizzas');
+
     }
 }

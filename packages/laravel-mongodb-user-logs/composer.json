@@ -1,0 +1,30 @@
+{
+    "name": "arneon/laravel-mongodb-user-logs",
+    "description": "User logs registered in MongoDB",
+    "minimum-stability": "stable",
+    "version": "1.0.0",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arnaldo Orozco Nuñez",
+            "email": "arneon@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "mongodb/laravel-mongodb": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arneon\\MongodbUserLogs\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+
+            ]
+        }
+    }
+}

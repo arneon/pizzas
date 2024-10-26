@@ -22,6 +22,7 @@
             <a class="navbar-brand" href="#">
                <img src="{{ isset($server_fqdn) ? $server_fqdn : 'http://localhost' }}/logo.jpg" alt="Logo" width="100">
             </a>
+
             <!-- Mobile Buttons -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,6 +54,23 @@
                         </li>
                     @endif
                 </ul>
+
+                <!-- Select para cambiar de idioma -->
+                <!-- <div class="text-center mb-4"> -->
+                    <select id="languageSelect" class="flag-select form-select">
+                        <option value="">Seleccione</option>
+                        <option value="/lang/es" class="flag-option">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg" alt="España"> Español
+                        </option>
+                        <option value="/lang/en" class="flag-option">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" alt="Inglaterra"> English
+                        </option>
+                        <option value="/lang/it" class="flag-option">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" alt="Italia"> Italiano
+                        </option>
+                    </select>
+                <!-- </div> -->
+
             </div>
         </div>
     </nav>
@@ -77,6 +95,11 @@
 <script>
     $(document).ready(function() {
         console.log('CASFID - Pizzas section');
+
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            var selectedLanguage = this.value;
+            window.location.href = selectedLanguage;
+        });
     });
 </script>
 </body>

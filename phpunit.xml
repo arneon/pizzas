@@ -9,9 +9,10 @@
             <directory>tests/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
-            <directory>tests/Feature</directory>
+             <directory>tests/Feature</directory>
             <directory>packages/laravel-users/tests/Feature</directory>
             <directory>packages/laravel-pizzas/tests/Feature</directory>
+            <directory>packages/laravel-mongodb-user-logs/tests/Feature</directory>
         </testsuite>
     </testsuites>
     <source>

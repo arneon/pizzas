@@ -1,7 +1,7 @@
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.3
+            context: ./docker/8.3
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -37,7 +37,7 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
             - 'sail-mysql:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
         healthcheck:
@@ -63,6 +63,32 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+
+    mongodb:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: '${MONGODB_USER}'
+            MONGO_INITDB_ROOT_PASSWORD: '${MONGODB_PASSWORD}'
+        volumes:
+            - sail-mongodb:/data/db
+        ports:
+            - 27017:27017
+        networks:
+            - sail
+
+    mongo-express:
+        image: mongo-express
+        restart: always
+        ports:
+            - 8081:8081
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: '${MONGODB_USER}'
+            ME_CONFIG_MONGODB_ADMINPASSWORD: '${MONGODB_PASSWORD}'
+            ME_CONFIG_MONGODB_URL: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongodb:27017/
+            ME_CONFIG_BASICAUTH:
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
@@ -70,4 +96,6 @@ volumes:
     sail-mysql:
         driver: local
     sail-redis:
+        driver: local
+    sail-mongodb:
         driver: local

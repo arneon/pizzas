@@ -20,6 +20,8 @@ use Arneon\LaravelPizzas\Infrastructure\Requests\UpdateIngredientRequest;
 use Arneon\LaravelPizzas\Application\UseCases\DeleteIngredientUseCase;
 use Arneon\LaravelPizzas\Infrastructure\Requests\DeleteIngredientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Arneon\MongodbUserLogs\Application\Facade\MongodbLogFacade;
 
 class PizzaController
 {
@@ -128,13 +130,26 @@ class PizzaController
             $validatedData = $createIngredientRequest->__invoke();
         }
         catch (\Exception $e){
+            MongodbLogFacade::create(new Request([
+                'level' => 'error',
+                'message' => $e->getMessage()
+            ]));
             return response()->json(['errors' => ['message' => $e->getMessage()]], 400);
         }
 
         try {
-            return response()->json(['data' => $this->createIngredientUseCase->__invoke($validatedData)]);
+            $data = ['data' => $this->createIngredientUseCase->__invoke($validatedData)];
+
+            $newRequest = new Request(['message' => 'Created ingredient: id => '.$data['data']['id'], 'level' => 'info']);
+            MongodbLogFacade::create($newRequest);
+
+            return response()->json($data);
         }catch (\Exception $e)
         {
+            MongodbLogFacade::create(new Request([
+                'level' => 'error',
+                'message' => $e->getMessage()
+            ]));
             return response()->json(['errors' => ['message' => $e->getMessage()]], 500);
         }
     }

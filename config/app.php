@@ -180,6 +180,9 @@ return [
         Arneon\LaravelPizzas\Infrastructure\Providers\PackageServiceProvider::class,
         Arneon\LaravelPizzas\Infrastructure\Providers\EventServiceProvider::class,
 
+        MongoDB\Laravel\MongoDBServiceProvider::class,
+        Arneon\MongodbUserLogs\Infrastructure\Providers\PackageServiceProvider::class,
+
     ])->toArray(),
 
     /*

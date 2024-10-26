@@ -26,13 +26,37 @@
         .modal.show {
             z-index: 1050; /* Make sure modals are on top */
         }
+        /* Custom styling for select with flags */
+        .flag-select {
+            margin-bottom: 20px;
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .flag-option {
+            display: flex;
+            align-items: center;
+        }
+        .flag-option img {
+            width: 25px;
+            margin-right: 10px;
+        }
     </style>
 <body>
 <div class="container mt-4">
-    <h1 class="text-center">Admin. Ingredients</h1>
+
+
+
+    <h1 class="text-center">{{ Lang::has('laravel-pizzas::messages.Admin. Ingredients')
+        ?  __('laravel-pizzas::messages.Admin. Ingredients', [], Session::get('locale'))
+         : 'Admin. Ingredients' }}</h1>
 
     <div class="text-end mb-3">
-        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addIngredientModal" id="addIngredientBtn">Add new ingredient</button>
+        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addIngredientModal" id="addIngredientBtn">
+            {{ Lang::has('laravel-pizzas::messages.Add new ingredient')
+        ?  __('laravel-pizzas::messages.Add new ingredient', [], Session::get('locale'))
+         : 'Add new ingredient' }}
+            </button>
     </div>
 
     <div class="row" id="pizza-list">
@@ -40,20 +64,32 @@
             <div class="col-md-4 pizza-card">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $ingredient['name'] }}</h5>
-                        <p class="card-text"><strong>Precio:</strong> {{ $ingredient['price'] }}</p>
+                        <h5 class="card-title">
+                            {{ Lang::has('laravel-pizzas::messages.'.$ingredient['name'])
+                            ?  __('laravel-pizzas::messages.'.$ingredient['name'], [], Session::get('locale'))
+                             : $ingredient['name'] }}
+                            </h5>
+                        <p class="card-text"><strong>
+                                {{ Lang::has('laravel-pizzas::messages.Price')
+                            ?  __('laravel-pizzas::messages.Price', [], Session::get('locale'))
+                             : 'Price' }}
+                                :</strong> {{ $ingredient['price'] }}</p>
                         <button class="btn btn-primary editPizzaBtn buttonLoadFormEditPizza"  data-bs-toggle="modal" data-bs-target="#pizzaModal"
                                 data-id="{{ $ingredient['id'] }}"
                                 data-name="{{ $ingredient['name'] }}"
                                 data-price="{{ $ingredient['price'] }}">
-                            Edit
+                            {{ Lang::has('laravel-pizzas::messages.Edit')
+                            ?  __('laravel-pizzas::messages.Edit', [], Session::get('locale'))
+                             : 'Edit' }}
                         </button>
 
                         <button class="btn btn-danger buttonDeletePizza"
                                 data-id="{{ $ingredient['id'] }}"
                                 data-name="{{ $ingredient['name'] }}"
                         >
-                            Delete
+                            {{ Lang::has('laravel-pizzas::messages.Delete')
+                            ?  __('laravel-pizzas::messages.Delete', [], Session::get('locale'))
+                             : 'Delete' }}
                         </button>
                     </div>
                 </div>
@@ -66,7 +102,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="pizzaModalLabel">Add / Edit Pizza</h5>
+                <h5 class="modal-title" id="pizzaModalLabel">Add / Edit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -75,15 +111,25 @@
                     <input type="hidden" id="pizzaId" name="pizzaId">
 
                     <div class="mb-3">
-                        <label for="pizzaName" class="form-label">Name</label>
+                        <label for="pizzaName" class="form-label">{{ Lang::has('laravel-pizzas::messages.Ingredient name')
+                        ?  __('laravel-pizzas::messages.Ingredient name', [], Session::get('locale'))
+                         : 'Ingredient name' }}</label>
                         <input type="text" class="form-control" id="pizzaName" name="pizzaName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="pizzaImage" class="form-label">Price</label>
+                        <label for="pizzaImage" class="form-label">
+                            {{ Lang::has('laravel-pizzas::messages.Ingredient Price')
+                        ?  __('laravel-pizzas::messages.Ingredient Price', [], Session::get('locale'))
+                         : 'Ingredient Price' }}
+                            </label>
                         <input type="text" class="form-control" id="pizzaPrice" name="pizzaPrice">
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+                    <button type="submit" class="btn btn-primary mt-3">
+                        {{ Lang::has('laravel-pizzas::messages.Save')
+                        ?  __('laravel-pizzas::messages.Save', [], Session::get('locale'))
+                         : 'Save' }}
+                    </button>
                 </form>
             </div>
         </div>
@@ -112,7 +158,11 @@
                             @endforeach
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" id="selectIngredientsBtn">Add Ingredient</button>
+                    <button type="button" class="btn btn-primary" id="selectIngredientsBtn">
+                        {{ Lang::has('laravel-pizzas::messages.Add Ingredient')
+                        ?  __('laravel-pizzas::messages.Add Ingredient', [], Session::get('locale'))
+                         : 'Add Ingredient' }}
+                        </button>
                 </form>
             </div>
         </div>
@@ -123,21 +173,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addIngredientModalLabel">Add Ingredient</h5>
+                <h5 class="modal-title" id="addIngredientModalLabel">
+                    {{ Lang::has('laravel-pizzas::messages.Add Ingredient')
+                        ?  __('laravel-pizzas::messages.Add Ingredient', [], Session::get('locale'))
+                         : 'Add Ingredient' }}
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="ingredientForm">
                     @csrf
                     <div class="mb-3">
-                        <label for="ingredientName" class="form-label">Ingredient name</label>
+                        <label for="ingredientName" class="form-label">
+                            {{ Lang::has('laravel-pizzas::messages.Ingredient name')
+                            ?  __('laravel-pizzas::messages.Ingredient name', [], Session::get('locale'))
+                             : 'Ingredient name' }}
+                            </label>
                         <input type="text" class="form-control" id="ingredientName" name="ingredientName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="ingredientPrice" class="form-label">Ingredient Price </label>
+                        <label for="ingredientPrice" class="form-label">
+                            {{ Lang::has('laravel-pizzas::messages.Ingredient Price')
+                            ?  __('laravel-pizzas::messages.Ingredient Price', [], Session::get('locale'))
+                             : 'Ingredient Price' }}
+                             </label>
                         <input type="text" class="form-control" id="ingredientPrice" name="ingredientPrice" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">
+                        {{ Lang::has('laravel-pizzas::messages.Add')
+                            ?  __('laravel-pizzas::messages.Add', [], Session::get('locale'))
+                             : 'Add' }}
+                        </button>
                 </form>
             </div>
         </div>
@@ -215,7 +281,9 @@
             var name = $(this).data('name');
             var price = $(this).data('price');
 
-            $('#pizzaModalLabel').text('Edit Ingredient');
+            $('#pizzaModalLabel').text('{{ Lang::has('laravel-pizzas::messages.Edit Ingredient')
+                        ?  __('laravel-pizzas::messages.Edit Ingredient', [], Session::get('locale'))
+                         : 'Edit Ingredient' }}');
             $('#pizzaId').val(id);
             $('#pizzaName').val(name);
             $('#pizzaPrice').val(price);
@@ -296,6 +364,9 @@
                 }
             });
         });
+
+
+
     });
 </script>
 @endsection

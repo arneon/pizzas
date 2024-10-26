@@ -31,7 +31,7 @@ class EloquentRepository implements RepositoryInterface
 
     public function findAllPizzas()
     {
-        return Model::all()->toArray();
+        return Model::all();
     }
     public function findPizzaById(int $id)
     {
